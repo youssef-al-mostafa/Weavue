@@ -1,28 +1,18 @@
-<template>
-  <div class="f-weath">
-    <div class="weath-details row">
-      <h1 class="temperature">
-        {{ weatherData ? weatherData.current.temp_c + '°C' : 'Loading...' }}
-      </h1>
-      <p class="date-time">
-        {{ weatherData ? formatDateTime(weatherData.location.localtime) : 'Loading...' }}
-      </p>
-    </div>
-    <div class="weath-contact">
-      <p class="contact-location">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill"
-          viewBox="0 0 16 16">
-          <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6" />
-        </svg>
-        {{ weatherData ? weatherData.location.name + ', ' + weatherData.location.country : 'Loading...' }}
-      </p>
-    </div>
-  </div>
-</template>
-
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
 import axios from 'axios';
+import CurrentLocation from "./CurrentLocation.vue";
+
+const props = defineProps({
+  lat: {
+    type: String,
+    required: false,
+  },
+  long: {
+    type: String,
+    required: false,
+  }
+});
 
 interface WeatherLocation {
   name: string;
@@ -40,7 +30,6 @@ interface WeatherData {
 }
 
 const weatherData = ref<WeatherData | null>(null);
-
 const formatDateTime = (dateTimeString: string): string => {
   const options: Intl.DateTimeFormatOptions = {
     weekday: 'long',
@@ -70,6 +59,27 @@ onMounted(async () => {
   }
 });
 </script>
+<template>
+  <div class="f-weath">
+    <div class="weath-details row">
+      <h1 class="temperature">
+        {{ weatherData ? weatherData.current.temp_c + '°C' : 'Loading...' }}
+      </h1>
+      <p class="date-time">
+        {{ weatherData ? formatDateTime(weatherData.location.localtime) : 'Loading...' }}
+      </p>
+    </div>
+    <div class="weath-contact">
+      <p class="contact-location">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill"
+          viewBox="0 0 16 16">
+          <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6" />
+        </svg>
+        {{ weatherData ? weatherData.location.name + ', ' + weatherData.location.country : 'Loading...' }}
+      </p>
+    </div>
+  </div>
+</template>
 
 <style lang="scss">
 .f-weath {
