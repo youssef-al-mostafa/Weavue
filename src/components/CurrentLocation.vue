@@ -1,4 +1,3 @@
-
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 
@@ -6,6 +5,14 @@ const latitude = ref<number | null>(null)
 const longitude = ref<number | null>(null)
 const errorMessage = ref<string | null>(null)
 const isLoading = ref(false)
+
+const props = defineProps({
+  dataOnly: {
+    type: Boolean,
+    required: false,
+    default: false,
+  }
+});
 
 const getGeolocation = () => {
   if ("geolocation" in navigator) {
@@ -31,7 +38,7 @@ onMounted(() => {
 })
 </script>
 <template>
-  <div class="current-location-cont">
+  <div v-if="!props.dataOnly" class="current-location-cont">
     <h1>Geolocation Example</h1>
     <p v-if="errorMessage">{{ errorMessage }}</p>
     <p v-if="latitude && longitude">Latitude: {{ latitude }}, Longitude: {{ longitude }}</p>
