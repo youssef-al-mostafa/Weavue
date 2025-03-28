@@ -9,14 +9,22 @@
       <NavBar />
       <div class="banner-main flex mt-[24px] justify-between px-[64px]">
          <div class="main-col flex flex-col gap-7 w-[40%]">
-            <CurrentLocation :data-only="true" />
-            <h1 class="text-[#241717] font-bold text-[59px]  text-5xl">Weavue</h1>
+            <h1 class="text-[#241717] text-[64px] text-5xl tracking-[5px]">Weavue</h1>
             <p class="text-black text-xl">
-               Get accurate weather forecasts for the next 3 days and plan your activities with confidence.
+               Get accurate weather forecasts for the next 3 days
+               and plan your activities with confidence.
             </p>
-            <Search />
+            <div>
+               <CurrentLocation />
+               <Search />
+            </div>
          </div>
          <img :src="BannerImage" class="" alt="" srcset="">
       </div>
    </section>
 </template>
+<style lang="scss">
+h1 {
+   font-family: var(--font-lobster);
+}
+</style>

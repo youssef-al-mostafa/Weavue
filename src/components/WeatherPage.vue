@@ -4,6 +4,11 @@ import axios from 'axios';
 import CurrentLocation from "./CurrentLocation.vue";
 
 const props = defineProps({
+  activated: {
+    type: Boolean,
+    required: false,
+    default: false
+  },
   lat: {
     type: String,
     required: false,
@@ -30,6 +35,11 @@ interface WeatherData {
 }
 
 const weatherData = ref<WeatherData | null>(null);
+const isLoading = ref(true);
+const error = ref<string | null>(null);
+const latitude = ref<number | null>(null);
+const longitude = ref<number | null>(null);
+
 const formatDateTime = (dateTimeString: string): string => {
   const options: Intl.DateTimeFormatOptions = {
     weekday: 'long',
@@ -44,111 +54,40 @@ const formatDateTime = (dateTimeString: string): string => {
   return dateTime.toLocaleString('en-US', options);
 };
 
-onMounted(async () => {
+const fetchWeatherData = async () => {
+  isLoading.value = true;
+  error.value = null;
+
+  if (!latitude.value || !longitude.value) {
+    error.value = "Location coordinates unavailable";
+    isLoading.value = false;
+    return;
+  }
+
   try {
     const response = await axios.get<WeatherData>('https://api.weatherapi.com/v1/current.json', {
       params: {
         key: '1087a4e93c0343b7ad370948240507',
-        q: '24510 saint marcel du perigord, France',
+        q: `${latitude.value},${longitude.value}`,
         aqi: 'yes',
       },
     });
     weatherData.value = response.data;
-  } catch (error) {
-    console.error('Error fetching weather data:', error);
+  } catch (err) {
+    error.value = "Failed to fetch weather data. Please try again later.";
+    console.error('Error fetching weather data:', err);
+  } finally {
+    isLoading.value = false;
   }
-});
+};
+
 </script>
 <template>
-  <div class="f-weath">
-    <div class="weath-details row">
-      <h1 class="temperature">
-        {{ weatherData ? weatherData.current.temp_c + '°C' : 'Loading...' }}
-      </h1>
-      <p class="date-time">
-        {{ weatherData ? formatDateTime(weatherData.location.localtime) : 'Loading...' }}
-      </p>
-    </div>
-    <div class="weath-contact">
-      <p class="contact-location">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill"
-          viewBox="0 0 16 16">
-          <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6" />
-        </svg>
-        {{ weatherData ? weatherData.location.name + ', ' + weatherData.location.country : 'Loading...' }}
-      </p>
-    </div>
+  <div v-if="props.activated" class="weather-page">
+    <h1 class="text-black text-2xl">Youssef</h1>
   </div>
 </template>
 
 <style lang="scss">
-.f-weath {
-  .weath-details {
-    @media (max-width: 767px) {
-      margin: auto;
-      padding-left: 0vw;
-    }
 
-    width: 100%;
-    padding-left: 27px;
-    margin-bottom: 18px;
-
-    h1 {
-      @media (max-width: 767px) {
-        font-size: 55px;
-        width: 100%;
-        text-align: center;
-      }
-
-      font-size: 61px;
-      font-weight: 200;
-      margin: 0;
-      color: #383716;
-      text-align: center;
-      padding-inline: 0px;
-      width: fit-content;
-    }
-
-    p {
-      @media (max-width: 767px) {
-        padding-left: 0vw;
-        padding-right: 0;
-        text-align: center;
-        margin-left: 0vw;
-        border-left: 0px;
-      }
-
-      margin-left: auto;
-      border-left: solid 1px #707070;
-      padding-left: 15px;
-      font-size: 14px;
-      color: #383716;
-      margin-top: auto;
-      margin-bottom: 11px;
-    }
-  }
-
-  .weath-contact {
-    @media (max-width: 767px) {
-      margin-block: 22px;
-      text-align: center;
-      margin-top: 0px;
-    }
-
-    p {
-      @media (max-width: 767px) {
-        margin-left: 0px;
-      }
-
-      font-size: 13px;
-      color: #707070;
-      margin-left: 17px;
-    }
-
-    .contact-numb {
-      margin: auto;
-      width: 88%;
-    }
-  }
-}
 </style>
