@@ -3,3 +3,12 @@
 @plugin "daisyui";
 
 
+:root {
+  --font-montserrat: 'Montserrat', sans-serif;
+  --font-winky: 'Winky Sans', sans-serif;
+  --font-lobster: 'Lobster', sans-serif;
+}
+
+body {
+  font-family: var(--font-winky);
+}

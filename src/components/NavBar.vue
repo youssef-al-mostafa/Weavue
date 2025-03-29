@@ -33,7 +33,7 @@ onMounted(() => {
         <img class="logo h-17 w-auto" :src="imgUrl" alt="Weavue" />
       </div>
       <div class="menu-nav flex gap-9">
-        <p class="menu-a text-[#333333] font-bold text-[19px] font-sans">{{ currentDate }}</p>
+        <p class="menu-a text-[#333333] font-bold text-[24px] font-sans">{{ currentDate }}</p>
       </div>
       <div class="nav-theme-btn text-lg text-black">
         <label class="swap swap-rotate">
