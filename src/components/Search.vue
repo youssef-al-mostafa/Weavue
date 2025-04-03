@@ -95,8 +95,13 @@ const closeResults = () => {
         </g>
       </svg>
       <input v-model="searchQuery"
-        class="text-black bg-transparent border-none placeholder:text-black outline-none py-3" type="search" required
-        placeholder="Search" @blur="closeResults" />
+        class="text-black bg-transparent border-none 
+               placeholder:text-black outline-none 
+               py-3 font-medium" 
+        type="search" 
+        required
+        placeholder="Search" 
+        @blur="closeResults" />
     </label>
 
     <!-- Search results dropdown -->
