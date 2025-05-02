@@ -5,7 +5,7 @@
  import CurrentLocation from "./CurrentLocation.vue";
 </script>
 <template>
-   <section class="banner rounded-[36px] max-w-[1800px] bg-gradient-to-b from-[#F9F7F6] to-transparent px-12 mx-[24px]">
+   <section class="banner rounded-[36px] max-w-[1800px] bg-gradient-to-b from-[#F9F7F6] to-transparent px-12 mx-auto">
       <NavBar />
       <div class="banner-main flex mt-[24px] justify-between px-[64px]">
          <div class="main-col flex flex-col gap-7 w-[40%]">

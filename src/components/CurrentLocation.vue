@@ -1,17 +1,9 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
+import { location } from '@/stores/locationStore';
 
-const props = defineProps({
-
-});
-
-interface errorMessageFormat {
-  msg : string,
-  active : boolean,
-}
-
-const latitude = ref<number | null>(null)
-const longitude = ref<number | null>(null)
+const latitude = ref<number>(0)
+const longitude = ref<number>(0)
 const isLoading = ref(false)
 
 const errorMessage = ref({
@@ -45,20 +37,16 @@ const getGeolocation = () => {
       }
     )
   } 
-  // else {
-  //   errorMessage.msg = "Geolocation is not supported by your browser."
-  // }
-  // if (latitude.value == null && longitude.value == null) {
-  //   errorMessage.active = true; 
-  // }
 }
 
 const goWithCurrentLocation = () => {
   getGeolocation();
 
   setTimeout(() => {
-    console.log('lat:', latitude.value, 'long:', longitude.value);
-    console.log('Error state:', errorMessage.value.active);
+    //console.log('lat:', latitude.value, 'long:', longitude.value);
+    location.lat = latitude.value;  
+    location.long = longitude.value;
+    errorMessage.value.active ? console.log('Error state:', errorMessage.value.active) : '';
 
     if (latitude.value === null && longitude.value === null && !errorMessage.value.active) {
       errorMessage.value.active = true;
