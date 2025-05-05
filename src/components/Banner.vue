@@ -1,6 +1,6 @@
 <script setup lang="ts">
  import BannerImage from "../assets/images/banner_image_no_bk.png"
- import Search from "../components/Search.vue";
+ import Search from "./Add.vue";
  import NavBar from './NavBar.vue'
  import CurrentLocation from "./CurrentLocation.vue";
 </script>

@@ -1,14 +1,28 @@
 <script setup lang="ts">
 import { onMounted, watchEffect } from 'vue';
 import { useWeather } from '@/composables/useWeather';
-import { location } from '@/stores/locationStore';
+
+const props = defineProps({
+   cityName: {
+    type: String,
+    required: false
+   },
+   lat: {
+    type: Number,
+    required: false
+   },
+   long: {
+    type: Number,
+    required: false
+   }
+});
 
 const {
   weatherData,
   isLoading,
   error,
   fetchWeatherByCoords,
-  formatDateTime,
+  fetchWeatherByCity,
   temperature,
   location: locationName,
   country,
@@ -16,21 +30,24 @@ const {
 } = useWeather();
 
 watchEffect(() => {
-  if (location.lat && location.long) {
-    fetchWeatherByCoords(location.lat, location.long);
+  if (props.lat && props.long) {
+    fetchWeatherByCoords(props.lat, props.long);
+  }
+  if (props.cityName) {
+    fetchWeatherByCity(props.cityName);
   }
 });
 
 onMounted(() => {
   //console.log('Latitude:', location.lat, 'Longitude:', location.long);
-  if (location.lat && location.long) {
-    fetchWeatherByCoords(location.lat, location.long);
+  if (props.lat && props.long) {
+    fetchWeatherByCoords(props.lat, props.long);
   }
 });
 </script>
 
 <template>
-  <div class="weather-page-cont rounded-[16px] bg-[#dce4ea6b] py-4 mt-2">
+  <div class="weather-card-cont w-[16%] rounded-[16px] bg-[#dce4ea6b] py-4 mt-2">
     <div class="weather-page" v-if="isLoading || error || weatherData"> 
       <div v-if="isLoading" class="loading-indicator">
         Loading weather data...
@@ -49,7 +66,7 @@ onMounted(() => {
   </div>
 </template>
 <style lang="scss">
-.weather-page-cont {
+.weather-card-cont {
   color: black ;
   .weather-page {
     padding: 1rem;
