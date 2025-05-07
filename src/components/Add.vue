@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { cities } from '@/stores/cityStore';  
+import { cities } from '@/stores/cityStore';
 import { ref } from 'vue';
 
 const searchQuery = ref('');
@@ -7,9 +7,9 @@ const searchQuery = ref('');
 function handleInputChange() {
   if (searchQuery.value.trim()) {
     cities.addCity(searchQuery.value.trim());
-    
+
     console.log('Cities that we store :', cities.list);
-    searchQuery.value = ''; 
+    searchQuery.value = '';
   }
 }
 </script>
@@ -35,8 +35,12 @@ function handleInputChange() {
              focus-within:border-none 
              focus-within:shadow-none 
              focus-within:ring-0">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-buildings"
-        viewBox="0 0 16 16">
+      <svg xmlns="http://www.w3.org/2000/svg" 
+           width="24" 
+           height="24" 
+           fill="currentColor" 
+           class="bi bi-buildings"
+           viewBox="0 0 16 16">
         <path
           d="M14.763.075A.5.5 0 0 1 15 .5v15a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5V14h-1v1.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V10a.5.5 0 0 1 .342-.474L6 7.64V4.5a.5.5 0 0 1 .276-.447l8-4a.5.5 0 0 1 .487.022M6 8.694 1 10.36V15h5zM7 15h2v-1.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5V15h2V1.309l-7 3.5z" />
         <path
@@ -49,3 +53,22 @@ function handleInputChange() {
     </label>
   </div>
 </template>
+<style lang="scss">
+.search_bar_container {
+  .input {
+    @media (max-width: 767px) {
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding-top: 12px;
+      border-radius: 25px;
+    }
+
+    input {
+      @media (max-width: 767px) {
+        text-align: center;
+      }
+    }
+  }
+}
+</style>

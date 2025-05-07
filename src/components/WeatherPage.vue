@@ -11,7 +11,7 @@ onMounted(() => {
 </script>
 <template>
   <section class="flex max-w-[1800px] px-6 mx-auto justify-start w-full pb-[80px]">
-    <div class="weather-card-row flex justify-start gap-2 w-full">
+    <div class="weather-card-row flex justify-start gap-2 w-full flex-wrap">
       <WeatherCard v-if="location.lat && location.long" :lat="location.lat" :long="location.long" />
       <WeatherCard v-for="(city, index) in cities.list" :key="index" :cityName="city" />
     </div>

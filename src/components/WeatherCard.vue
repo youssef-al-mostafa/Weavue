@@ -3,18 +3,18 @@ import { onMounted, watchEffect } from 'vue';
 import { useWeather } from '@/composables/useWeather';
 
 const props = defineProps({
-   cityName: {
+  cityName: {
     type: String,
     required: false
-   },
-   lat: {
+  },
+  lat: {
     type: Number,
     required: false
-   },
-   long: {
+  },
+  long: {
     type: Number,
     required: false
-   }
+  }
 });
 
 const {
@@ -48,7 +48,7 @@ onMounted(() => {
 
 <template>
   <div class="weather-card-cont w-[16%] rounded-[16px] bg-[#dce4ea6b] py-4 mt-2 mx-auto">
-    <div class="weather-page" v-if="isLoading || error || weatherData"> 
+    <div class="weather-page" v-if="isLoading || error || weatherData">
       <div v-if="isLoading" class="loading-indicator">
         Loading weather data...
       </div>
@@ -67,13 +67,17 @@ onMounted(() => {
 </template>
 <style lang="scss">
 .weather-card-cont {
-  color: black ;
-  @media (max-width: 767px) {
-    width: 100%;
+  color: black;
+  @media (max-width: 1100px) {
+    width: 24%;
   }
   @media (max-width: 991px) {
     width: 33%;
   }
+  @media (max-width: 767px) {
+    width: 100%;
+  }
+
   .weather-page {
     padding: 1rem;
 
@@ -93,9 +97,6 @@ onMounted(() => {
       display: flex;
       flex-direction: column;
       gap: 0.5rem;
-      @media (max-width: 991px) {
-        font-size: 2em;
-      }
     }
   }
 }

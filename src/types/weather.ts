@@ -2,10 +2,13 @@ export interface WeatherLocation {
   name: string;
   country: string;
   localtime: string;
+  region?: string;
 }
 
 export interface WeatherCurrent {
   temp_c: number;
+  temp_f: number;
+  is_day: number;
   condition?: {
     text: string;
     icon: string;
@@ -14,6 +17,7 @@ export interface WeatherCurrent {
   wind_kph?: number;
   humidity?: number;
   feelslike_c?: number;
+  cloud: number; 
 }
 
 export interface WeatherData {
