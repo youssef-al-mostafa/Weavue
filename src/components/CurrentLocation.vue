@@ -105,15 +105,15 @@ onMounted(() => {
 </template>
 <style scoped lang="scss">
 .current-location-cont {
-  h1 {
-    font-size: 24px;
-    margin-bottom: 10px;
-    color: black;
-  }
+  @media (max-width: 767px) {
+    text-align: center;
+    margin-bottom: 2em;
 
-  p {
-    font-size: 18px;
-    color: black;
+  }
+  .btn {
+    @media (max-width: 767px) {
+      margin-inline: auto;
+    }
   }
 }
 .slide-down {
