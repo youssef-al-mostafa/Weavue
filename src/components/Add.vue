@@ -7,8 +7,6 @@ const searchQuery = ref('');
 function handleInputChange() {
   if (searchQuery.value.trim()) {
     cities.addCity(searchQuery.value.trim());
-
-    console.log('Cities that we store :', cities.list);
     searchQuery.value = '';
   }
 }
@@ -16,29 +14,29 @@ function handleInputChange() {
 
 <template>
   <div class="search_bar_container relative">
-    <label class="input 
-             bg-[#7fcbcb] 
-             text-black 
-             font-bold 
-             rounded-full 
-             text-lg 
+    <label class="input
+             bg-[#7fcbcb]
+             text-black
+             font-bold
+             rounded-full
+             text-lg
              flex
              gap-4
              w-full
              h-fit
              px-5
              py-1
-             transition-all  
-             outline-none 
-             duration-200 
-             focus-within:outline-none 
-             focus-within:border-none 
-             focus-within:shadow-none 
+             transition-all
+             outline-none
+             duration-200
+             focus-within:outline-none
+             focus-within:border-none
+             focus-within:shadow-none
              focus-within:ring-0">
-      <svg xmlns="http://www.w3.org/2000/svg" 
-           width="24" 
-           height="24" 
-           fill="currentColor" 
+      <svg xmlns="http://www.w3.org/2000/svg"
+           width="24"
+           height="24"
+           fill="currentColor"
            class="bi bi-buildings"
            viewBox="0 0 16 16">
         <path
@@ -46,8 +44,8 @@ function handleInputChange() {
         <path
           d="M2 11h1v1H2zm2 0h1v1H4zm-2 2h1v1H2zm2 0h1v1H4zm4-4h1v1H8zm2 0h1v1h-1zm-2 2h1v1H8zm2 0h1v1h-1zm2-2h1v1h-1zm0 2h1v1h-1zM8 7h1v1H8zm2 0h1v1h-1zm2 0h1v1h-1zM8 5h1v1H8zm2 0h1v1h-1zm2 0h1v1h-1zm0-2h1v1h-1z" />
       </svg>
-      <input class="text-black bg-transparent border-none 
-               placeholder:text-black outline-none 
+      <input class="text-black bg-transparent border-none
+               placeholder:text-black outline-none
                py-3 font-medium" type="search" v-model="searchQuery" @change="handleInputChange" required
         placeholder="Add a city" />
     </label>
