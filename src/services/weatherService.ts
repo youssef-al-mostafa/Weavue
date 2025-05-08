@@ -19,7 +19,6 @@ export const getCurrentWeatherByCoords = async (
       days: 2
     },
   });
-  console.log('response form the api weather ',response.data);
   return response.data;
 };
 

@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { onMounted, watchEffect } from 'vue';
 import { useWeather } from '@/composables/useWeather';
+import { DotLottieVue } from '@lottiefiles/dotlottie-vue';
+import { weatherGif } from '@/stores/weatherGif';
+import type { WeatherData } from '@/types/weather';
 
 const props = defineProps({
   cityName: {
@@ -38,6 +41,32 @@ watchEffect(() => {
   }
 });
 
+const getWeatherGif = (weatherData: WeatherData) => {
+  if (weatherData.current.is_day === 1) {
+    switch (weatherData.current.condition?.code) {
+      case 1003:
+        return weatherGif.day.cloudy;
+      case 1006:
+        return weatherGif.day.rainy;
+      case 1008:
+        return weatherGif.day.snowy;
+      default:
+        return weatherGif.day.clear;
+    }
+  } else {
+    switch (weatherData.current.condition?.code) {
+      case 1003:
+        return weatherGif.night.cloudy;
+      case 1006:
+        return weatherGif.night.rainy;
+      case 1008:
+        return weatherGif.night.snowy;
+      default:
+        return weatherGif.night.clear;
+    }
+  }
+};
+
 onMounted(() => {
   //console.log('Latitude:', location.lat, 'Longitude:', location.long);
   if (props.lat && props.long) {
@@ -47,7 +76,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="weather-card-cont w-[16%] rounded-[16px] bg-[#dce4ea6b] py-4 mt-2 mx-auto">
+  <div class="weather-card-cont w-[16%] rounded-[16px] bg-gradient-to-b from-transparent to-white py-4 mt-2 mx-auto">
     <div class="weather-page" v-if="isLoading || error || weatherData">
       <div v-if="isLoading" class="loading-indicator">
         Loading weather data...
@@ -58,6 +87,7 @@ onMounted(() => {
       </div>
 
       <div v-else-if="weatherData" class="weather-content">
+        <iframe class="rounded-[12px]" :src="getWeatherGif(weatherData)"></iframe>
         <h1 class="text-2xl font-bold">{{ temperature }}°C</h1>
         <p class="text-lg">{{ dateTime }}</p>
         <p>{{ locationName }}, {{ country }}</p>
@@ -68,12 +98,15 @@ onMounted(() => {
 <style lang="scss">
 .weather-card-cont {
   color: black;
+
   @media (max-width: 1100px) {
     width: 24%;
   }
+
   @media (max-width: 991px) {
     width: 33%;
   }
+
   @media (max-width: 767px) {
     width: 100%;
   }

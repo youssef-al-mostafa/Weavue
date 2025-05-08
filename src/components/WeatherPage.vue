@@ -6,8 +6,8 @@ import { onMounted } from 'vue';
 
 
 onMounted(() => {
-  console.log('weather page mounted with this cities', cities.list)
-}); 
+  //console.log('weather page mounted with this cities', cities.list)
+});
 </script>
 <template>
   <section class="flex max-w-[1800px] px-6 mx-auto justify-start w-full pb-[80px]">
