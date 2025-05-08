@@ -18,7 +18,6 @@ A modern, elegant weather application built with Vue.js that provides accurate w
 
 - **Frontend Framework**: Vue.js 3.5 with Composition API
 - **Type Safety**: TypeScript
-- **State Management**: Pinia
 - **Styling**: Tailwind CSS
 - **Build Tool**: Vite
 - **HTTP Client**: Axios
