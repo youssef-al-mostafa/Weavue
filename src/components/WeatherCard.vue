@@ -42,29 +42,47 @@ watchEffect(() => {
 });
 
 const getWeatherGif = (weatherData: WeatherData) => {
-  if (weatherData.current.is_day === 1) {
-    switch (weatherData.current.condition?.code) {
-      case 1003:
-        return weatherGif.day.cloudy;
-      case 1006:
-        return weatherGif.day.rainy;
-      case 1008:
-        return weatherGif.day.snowy;
-      default:
-        return weatherGif.day.clear;
-    }
-  } else {
-    switch (weatherData.current.condition?.code) {
-      case 1003:
-        return weatherGif.night.cloudy;
-      case 1006:
-        return weatherGif.night.rainy;
-      case 1008:
-        return weatherGif.night.snowy;
-      default:
-        return weatherGif.night.clear;
-    }
-  }
+ if (weatherData.current.is_day === 1) {
+   switch (weatherData.current.condition?.code) {
+     case 1003:
+     case 1006:
+     case 1009:
+     case 1030:
+       return weatherGif.day.cloudy;
+     case 1063:
+     case 1183:
+     case 1189:
+     case 1195:
+       return weatherGif.day.rainy;
+     case 1066:
+     case 1114:
+     case 1213:
+     case 1219:
+       return weatherGif.day.snowy;
+     default:
+       return weatherGif.day.clear;
+   }
+ } else {
+   switch (weatherData.current.condition?.code) {
+     case 1003:
+     case 1006:
+     case 1009:
+     case 1030:
+       return weatherGif.night.cloudy;
+     case 1063:
+     case 1183:
+     case 1189:
+     case 1195:
+       return weatherGif.night.rainy;
+     case 1066:
+     case 1114:
+     case 1213:
+     case 1219:
+       return weatherGif.night.snowy;
+     default:
+       return weatherGif.night.clear;
+   }
+ }
 };
 
 onMounted(() => {
