@@ -7,5 +7,3 @@ import WeatherPage from './components/WeatherPage.vue';
   <Banner />
   <WeatherPage />
 </template>
-
-
