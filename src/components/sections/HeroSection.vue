@@ -94,15 +94,15 @@ const weatherComponent = computed(() => {
       :style="{ background: skyGradient }">
       <component :is="weatherComponent" />
 
-      <div class="py-9 px-[38px] flex flex-col min-h-[520px] relative z-[2]">
+      <div class="py-9 px-[38px] max-sm:py-6 max-sm:px-5 flex flex-col min-h-[520px] relative z-[2]">
         <div class="flex justify-between items-start gap-4 [font-family:var(--mono)] text-[11.5px] tracking-[.12em] uppercase opacity-75">
-          <span class="flex items-center gap-2">
+          <span class="flex items-center gap-2 whitespace-nowrap">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="max-md:hidden">
               <path d="M12 22s7-7 7-12a7 7 0 1 0-14 0c0 5 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/>
             </svg>
             {{ coords }}
           </span>
-          <span class="flex items-center gap-[6px]">
+          <span class="flex items-center gap-[6px] whitespace-nowrap">
              Updated {{ updated }}
           </span>
         </div>
@@ -115,14 +115,14 @@ const weatherComponent = computed(() => {
         </div>
 
         <div class="flex items-start gap-[18px] mt-6">
-          <div class="[font-family:var(--serif)] text-[180px] max-[1180px]:text-[120px] leading-[.85] tracking-[-.04em] font-normal">
-            {{ Math.round(cur?.temp_c ?? 0) }}<sup class="text-[.32em] font-normal align-top ml-[6px] opacity-70">°C</sup>
+          <div class="[font-family:var(--serif)] text-[180px] max-[1180px]:text-[120px] max-sm:text-[96px] leading-[.85] tracking-[-.04em] font-normal whitespace-nowrap">
+            {{ Math.round(cur?.temp_c ?? 0) }}<sup class="text-[.32em] font-normal align-top ml-[2px] opacity-70">°C</sup>
           </div>
           <div class="pt-4">
-            <div class="[font-family:var(--serif)] italic text-[34px] leading-none tracking-[-.01em]">
+            <div class="[font-family:var(--serif)] italic text-[34px] max-sm:text-[26px] leading-none tracking-[-.01em]">
               {{ cur?.condition?.text }}
             </div>
-            <span class="block mt-[14px] text-[13px] [font-family:var(--mono)] tracking-[.1em] uppercase opacity-70">
+            <span class="block mt-[14px] text-[13px] [font-family:var(--mono)] tracking-[.1em] uppercase opacity-70 whitespace-nowrap">
               Feels {{ Math.round(cur?.feelslike_c ?? 0) }}° · H {{ Math.round(today?.day.maxtemp_c ?? 0) }}° L {{ Math.round(today?.day.mintemp_c ?? 0) }}°
             </span>
           </div>
